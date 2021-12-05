@@ -7,3 +7,4 @@ data = urllib.request.urlopen(url).read()
 output = json.loads(data)
 
 print(output)
+
