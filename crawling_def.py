@@ -9,20 +9,27 @@ output = json.loads(data)
 
 cf = open("C:/hm_py/crawling/result/crawling_def.csv",'w', newline='')
 
+keys = ['가격', '경도', '데이터기준일', '명칭', '영업시간', '위도', '재고량', '전화번호', '주소', '코드']
+
 wr = csv.writer(cf)
-wr.writerow(['가격', '경도', '데이터기준일', '명칭', '영업시간', '위도', '재고량', '전화번호', '주소', '코드'])
+wr.writerow(keys)
 
 # json 파일 열기
 def open_json():
     jsonArray = output.get("data")
 
-    for list in jsonArray:
+    for item in jsonArray:
+        list = []
+        
+        for i in range(len(keys)):
+            list.append(item.get(keys[i]))
+            
         csv_writer(list)
 
     
 # csv 파일 생성
 def csv_writer(list):
-    wr.writerow([list.get("가격"), list.get("경도"), list.get("데이터기준일"), list.get("명칭"), list.get("영업시간"), list.get("위도"), list.get("재고량"), list.get("전화번호"), list.get("주소"), list.get("코드")])
+    wr.writerow(list)
 
 
 def main(): 
